@@ -20,6 +20,13 @@ export const projectData = [
     project_desc: "Landing page for Forcythe",
     language: ["Next.js", "React", "Animations"]
   },
+    {
+    live_link: "https://entertainment-app-eta.vercel.app/",
+    git_link: "https://github.com/kasboi/entertainment-app",
+    project_name: "Fullstack Entertainment App",
+    project_desc: "A fullstack movie app built with Next.js to list trending movies and their information including reviews, cast and plot. It uses an API and localStorage for bookmark feature",
+    language: ["Next.js", "React", "API", "localStorage"]
+  },
   {
     live_link: "https://vencru-two.vercel.app/",
     git_link: "https://github.com/kasboi/vencru",

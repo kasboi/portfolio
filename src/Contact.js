@@ -81,10 +81,12 @@ const Contact = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [message, setMessage] = useState("")
+    const [formStatus, setFormStatus] = useState(false) // whether form is in the submission process or not
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        setFormStatus(true)
+        
         const url = "https://formspree.io/f/xrbaraoj"
         const body = {name, email, message}
 
@@ -100,6 +102,7 @@ const Contact = () => {
         } catch (error) {
             console.error(error.message)
         }
+        setFormStatus(true)
     }
 
     return (
@@ -120,7 +123,7 @@ const Contact = () => {
                     <textarea name="message" id="textarea" cols="30" rows="5" className="form_input" placeholder="Leave your message here" value={message} onChange={(e) => setMessage(e.target.value)} required></textarea>
                 </div>
                 <div className="form-class">
-                    <button type="submit" className="form_submit" id="submit">Submit</button>
+                    <button type="submit" className="form_submit" id="submit" disabled={formStatus}>{formStatus ? "Submitting" : "Submit"}</button>
                 </div>
             </form>
         </Container>

@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { device } from "./components/styles/Media";
+import { useState } from "react"
 
 const Container = styled.div`
   margin: 6rem auto 0 auto;
   max-width: 40rem;
-  color: ${({theme}) => theme.font.primaryText};
+  color: ${({ theme }) => theme.font.primaryText};
 
   .project__heading {
     position: relative;
@@ -77,29 +78,53 @@ const Container = styled.div`
 `
 
 const Contact = () => {
-  return ( 
-    <Container>
-        <h2 className="project__heading">Let's connect</h2>
-      <form action="https://formsubmit.co/dffac674e12d6f36acbc1d52ddc41b42" method="POST" id="survey-form">
-          <div className="form-class">
-              <label htmlFor="name" id="name-label">Name
-                  <input type="text" id="name" name="name" className="form_input" placeholder="Enter your name" required />
-              </label>
-          </div>
-          <div className="form-class">
-              <label htmlFor="email" id="email-label">Email
-                  <input type="email" name="email" id="email" className="form_input" placeholder="Enter your email" required />
-              </label>
-          </div>
-          <div className="form-class">
-              <textarea name="message" id="textarea" cols="30" rows="5" className="form_input" placeholder="Leave your message here"></textarea>
-          </div>
-          <div className="form-class">
-              <button type="submit" className="form_submit" id="submit">Submit</button>
-          </div>
-      </form>
-    </Container>
-   );
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [message, setMessage] = useState("")
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        const url = "https://formspree.io/f/xrbaraoj"
+        const body = {name, email, message}
+
+        try {
+            await fetch(url, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(body)
+            })
+            setName("")
+            setEmail("")
+            setMessage("")
+        } catch (error) {
+            console.error(error.message)
+        }
+    }
+
+    return (
+        <Container>
+            <h2 className="project__heading">Let's connect</h2>
+            <form onSubmit={handleSubmit} id="survey-form">
+                <div className="form-class">
+                    <label htmlFor="name" id="name-label">Name
+                        <input type="text" id="name" name="name" className="form_input" placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)} required />
+                    </label>
+                </div>
+                <div className="form-class">
+                    <label htmlFor="email" id="email-label">Email
+                        <input type="email" name="email" id="email" className="form_input" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                    </label>
+                </div>
+                <div className="form-class">
+                    <textarea name="message" id="textarea" cols="30" rows="5" className="form_input" placeholder="Leave your message here" value={message} onChange={(e) => setMessage(e.target.value)} required></textarea>
+                </div>
+                <div className="form-class">
+                    <button type="submit" className="form_submit" id="submit">Submit</button>
+                </div>
+            </form>
+        </Container>
+    );
 }
- 
+
 export default Contact;

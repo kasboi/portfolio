@@ -102,7 +102,7 @@ const Contact = () => {
         } catch (error) {
             console.error(error.message)
         }
-        setFormStatus(true)
+        setFormStatus(false)
     }
 
     return (

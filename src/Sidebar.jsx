@@ -64,7 +64,7 @@ const Rightdiv = styled.div`
       content: "";
       display: block;
       width: 1px;
-      height: 8rem;
+      height: 4rem;
       margin: 0px auto;
       background-color: ${({ theme }) => theme.font.secondaryText};
 
@@ -80,6 +80,7 @@ const Sidebar = () => {
     <>
       <Leftdiv>
         <ul className="logo-box">
+          {/* GitHub */}
           <li className="logo-box__container">
             <a
               href="https://github.com/kasboi"
@@ -89,36 +90,20 @@ const Sidebar = () => {
               <ion-icon name="logo-github"></ion-icon>
             </a>
           </li>
+          {/* LinkedIn */}
           <li className="logo-box__container">
             <a
-              href="https://github.com/kasboi"
-              rel="noreferrer"
-              target="_blank"
-            >
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-          <li className="logo-box__container">
-            <a
-              href="https://github.com/kasboi"
-              rel="noreferrer"
-              target="_blank"
-            >
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
-          <li className="logo-box__container">
-            <a
-              href="https://github.com/kasboi"
+              href="https://www.linkedin.com/in/abdullah-solahudeen/"
               rel="noreferrer"
               target="_blank"
             >
               <ion-icon name="logo-linkedin"></ion-icon>
             </a>
           </li>
+          {/* CodePen */}
           <li className="logo-box__container">
             <a
-              href="https://github.com/kasboi"
+              href="https://codepen.io/kolawole-abdullah-solahudeen"
               rel="noreferrer"
               target="_blank"
             >

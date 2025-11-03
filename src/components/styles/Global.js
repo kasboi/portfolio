@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components"
-import { device } from "./Media"
+import { createGlobalStyle } from "styled-components";
+import { device } from "./Media";
 
 const GlobalStyle = createGlobalStyle`
 :root {
@@ -52,14 +52,14 @@ ion-icon {
     margin-bottom: 5px;
     color: ${({ theme }) => theme.font.secondaryText};
 
+    
     @media ${device.tablet} {
-      font-size: 18px;
       margin: 5px 0;
     }
 }
 
 ${
-    "" /* ::-webkit-scrollbar {
+  "" /* ::-webkit-scrollbar {
     width: 12px;
 } */
 }
@@ -89,16 +89,12 @@ ${
     content: "";
     display: block;
     width: 1px;
-    height: 9rem;
+    height: 2rem;
     margin: 0px auto;
     background-color: ${({ theme }) => theme.font.secondaryText};
-    
-    @media ${device.tablet} {
-      height: 8rem;
-    }
   }
 }
 
-`
+`;
 
-export default GlobalStyle
+export default GlobalStyle;

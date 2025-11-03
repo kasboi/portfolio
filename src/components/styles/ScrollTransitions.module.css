@@ -1,0 +1,19 @@
+.scroll_0 {
+  transform: translateY(0);
+}
+
+.scroll_1 {
+    transform: translateY(50px);
+}
+
+.scroll_2 {
+    transform: translateY(100px);
+}
+
+.scroll_3 {
+    transform: translateY(150px);
+}
+
+.scroll_4 {
+    transform: translateY(200px);
+}

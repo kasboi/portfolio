@@ -1,8 +1,8 @@
+/* Icon styles for the light/dark mode toggle button */
 .ionicon {
-  width: 32px;
-  overflow: visible;
-  /* stroke: #000; */
   stroke-width: 32;
   stroke-linejoin: round;
   stroke-linecap: round;
+  overflow: visible;
+  width: 32px;
 }

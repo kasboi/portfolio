@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Theme } from "../components/styles/Theme";
+import { Theme } from "../components/styles/Theme.js";
 
 /* 
   Custom hook to store and retrieve the theme last used when
@@ -9,29 +9,37 @@ import { Theme } from "../components/styles/Theme";
 const { theme } = Theme;
 
 const useFetch = () => {
-  // localeStorage takes key/value pair, setting this as deafult key
-  let key
+  // localStorage takes key/value pair, setting this as default key
+  const key = "userTheme";
+
   const getUserTheme = () => {
-    if (localStorage.length > 0) {
-      const userTheme = JSON.parse(localStorage.getItem(key))
-      return userTheme
-    } else {
-      const userTheme = theme
-      return userTheme
+    try {
+      const storedTheme = localStorage.getItem(key);
+      if (storedTheme) {
+        return JSON.parse(storedTheme);
+      }
+    } catch (error) {
+      console.error("Error reading theme from localStorage:", error);
     }
-  }
+    // Return default theme if no stored theme or error
+    return theme;
+  };
 
-  const [here, setHere] = useState(getUserTheme())
+  const [here, setHere] = useState(getUserTheme());
 
-  const saveUserTheme = userToken => {
-    localStorage.setItem(key, JSON.stringify(userToken))
-    setHere(userToken)
-  }
+  const saveUserTheme = (userToken) => {
+    try {
+      localStorage.setItem(key, JSON.stringify(userToken));
+      setHere(userToken);
+    } catch (error) {
+      console.error("Error saving theme to localStorage:", error);
+    }
+  };
 
   return {
     here,
-    setHere: saveUserTheme
-  }
-}
+    setHere: saveUserTheme,
+  };
+};
 
-export default useFetch
+export default useFetch;

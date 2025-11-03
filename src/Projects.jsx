@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import style from "./components/styles/Projects.module.css";
 import { TiFolder, TiLink, TiSocialGithub } from "react-icons/ti";
 
-import { projectData } from "./ProjectList.jsx";
+import { projectData } from "./ProjectList.js";
 
 const Container = styled(motion.div)`
   max-width: 90%;

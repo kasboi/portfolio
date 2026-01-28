@@ -31,3 +31,7 @@ pnpm-debug.log*
 dist
 dist-ssr
 *.local
+
+# AI Instructions & Directory
+/.github
+/.agents

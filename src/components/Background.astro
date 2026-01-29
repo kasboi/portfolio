@@ -1,0 +1,325 @@
+---
+/**
+ * Background Section Component
+ * Displays background info, technologies, and work experience
+ * Static content with an interactive React island for work experience tabs
+ */
+import WorkExperience from './react/WorkExperience';
+
+interface TechItem {
+  name: string;
+  iconClass: string;
+}
+
+interface TechCategory {
+  title: string;
+  items: TechItem[];
+}
+
+const technologies: TechCategory[] = [
+  {
+    title: "Frontend Stack",
+    items: [
+      { name: "Javascript", iconClass: "devicon-javascript-plain" },
+      { name: "Typescript", iconClass: "devicon-typescript-plain" },
+      { name: "ReactJs", iconClass: "devicon-react-plain" },
+      { name: "Redux", iconClass: "devicon-redux-plain" },
+      { name: "NextJs", iconClass: "devicon-nextjs-plain" },
+      { name: "Sass", iconClass: "devicon-sass-plain" },
+    ]
+  },
+  {
+    title: "Backend Stack",
+    items: [
+      { name: "NodeJs", iconClass: "devicon-nodejs-plain" },
+      { name: "ExpressJs", iconClass: "devicon-express-original" },
+      { name: "Javascript", iconClass: "devicon-javascript-plain" },
+      { name: "Typescript", iconClass: "devicon-typescript-plain" },
+    ]
+  },
+  {
+    title: "CI/CD",
+    items: [
+      { name: "Github", iconClass: "devicon-github-original" },
+      { name: "Vercel", iconClass: "custom-vercel" },
+      { name: "Netlify", iconClass: "custom-netlify" },
+    ]
+  },
+  {
+    title: "Testing, DB & Misc.",
+    items: [
+      { name: "Jest", iconClass: "devicon-jest-plain" },
+      { name: "VS Code", iconClass: "devicon-vscode-plain" },
+      { name: "MongoDB", iconClass: "devicon-mongodb-plain" },
+      { name: "Git", iconClass: "devicon-git-plain" },
+      { name: "Bash", iconClass: "devicon-bash-plain" },
+    ]
+  }
+];
+---
+
+<section class="background-section" id="background">
+  <div class="background">
+    <h2 class="background-heading heading">Background</h2>
+    <div class="background-paragraph">
+      <p>
+        I am a software engineer at Andela, where I build web products with
+        a team of awesome people. In addition, I mentor aspiring front-end
+        developers through{" "}
+        <a
+          href="https://linktr.ee/careerconnectacademy"
+          target="_blank"
+          rel="noreferrer"
+        >
+          CareerConnects'
+        </a>{" "}
+        specialized boot camp program.
+      </p>
+      <p>
+        I have had the opportunity to work on various projects, including
+        web applications, mobile apps, and back-end systems.
+      </p>
+      <p>
+        I have expertise in technologies such as Javascript, Typescript, and
+        React, and I am familiar with agile development methodologies. I
+        enjoy working in a team environment and thrive on the challenge of
+        delivering high-quality software on time.
+      </p>
+      <p>
+        As an engineer, I enjoy combining my technical knowledge with my
+        keen eye for design to create beautiful, scalable, and efficient
+        applications that provide engaging, pixel-perfect user experiences.
+      </p>
+    </div>
+  </div>
+
+  <div class="technologies">
+    <h3 class="technologies-heading">Technologies</h3>
+    <p class="technologies-paragraph">
+      Here are some of the various technologies I am proficient with
+    </p>
+    <div class="tech-stack">
+      {technologies.map((category) => (
+        <ul class="tech-list">
+          <h3 class="tech-list-heading">{category.title}</h3>
+          {category.items.map((item) => (
+            <li class="tech-list-item">
+              {item.iconClass === "custom-vercel" ? (
+                <svg class="custom-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M24 22.525H0l12-21.05 12 21.05z" />
+                </svg>
+              ) : item.iconClass === "custom-netlify" ? (
+                <svg class="custom-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M6.49 19.04h-.23L5.13 17.9v-.23l1.73-1.71h1.2l.15.15v1.2L6.5 19.04ZM5.13 6.31V6.1l1.13-1.13h.23L8.2 6.68v1.2l-.15.15h-1.2L5.13 6.31Zm9.96 9.09h-1.65l-.14-.13v-3.83c0-.68-.27-1.2-1.1-1.23-.42 0-.9 0-1.43.02l-.07.08v4.96l-.14.14H8.9l-.13-.14V8.73l.13-.14h3.7a2.6 2.6 0 0 1 2.61 2.6v4.08l-.13.14Zm-8.37-2.44H.14L0 12.82v-1.64l.14-.14h6.58l.14.14v1.64l-.14.14Zm17.14 0h-6.58l-.14-.14v-1.64l.14-.14h6.58l.14.14v1.64l-.14.14ZM11.05 6.55V1.64l.14-.14h1.65l.14.14v4.9l-.14.14h-1.65l-.14-.13Zm0 15.81v-4.9l.14-.14h1.65l.14.13v4.91l-.14.14h-1.65l-.14-.14Z" />
+                </svg>
+              ) : (
+                <i class={`${item.iconClass} devicon`}></i>
+              )}
+              <span>{item.name}</span>
+            </li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
+
+  <!-- Work Experience - Interactive React Island -->
+  <WorkExperience client:visible />
+</section>
+
+<style>
+  .background-section {
+    padding: 2rem;
+    color: var(--font-primary);
+    font-size: 1rem;
+    max-width: 75rem;
+    margin: 0 auto;
+    /* Scroll-based fade-in animation */
+    animation: scrollFadeIn 0.4s ease-in both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+
+  @keyframes scrollFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .background-section {
+      padding: 3rem 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .background-section {
+      padding: 2rem 1.2rem;
+      margin-top: 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .background-section {
+      padding: 1.5rem 0.8rem;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .background-section {
+      padding: 1.5rem 1rem;
+    }
+  }
+
+  .heading {
+    margin-bottom: 1rem;
+  }
+
+  .background {
+    display: flex;
+    margin-bottom: 5rem;
+  }
+
+  @media (max-width: 768px) {
+    .background {
+      flex-direction: column;
+      max-width: 40rem;
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  .background-heading {
+    font-size: 1.25rem;
+    margin-right: 2.5rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--logo-color);
+    letter-spacing: 1px;
+    flex-basis: 20%;
+  }
+
+  .background-paragraph {
+    flex: 1;
+  }
+
+  @media (max-width: 600px) {
+    .background-paragraph {
+      font-size: 0.9rem;
+    }
+  }
+
+  .background-paragraph p:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .background-paragraph p:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .background-paragraph a {
+    color: var(--logo-color);
+    text-decoration: underline;
+  }
+
+  .technologies {
+    margin: 1.5rem 0;
+  }
+
+  .technologies-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--logo-color);
+    margin: 1rem 0;
+  }
+
+  .technologies-paragraph {
+    margin: 0.5rem 0;
+  }
+
+  .tech-stack {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .tech-list {
+    flex: 0 0 25%;
+    margin: 1rem 0;
+    list-style: none;
+    padding: 0;
+  }
+
+  @media (max-width: 768px) {
+    .tech-list {
+      flex: 0 0 30%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tech-list {
+      flex: 0 0 45%;
+    }
+  }
+
+  .tech-list-heading {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  @media (max-width: 768px) {
+    .tech-list-heading {
+      font-size: 0.9rem;
+    }
+  }
+
+  .tech-list-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .tech-list-item {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tech-list-item {
+      font-size: 0.85rem;
+    }
+  }
+
+  .devicon {
+    font-size: 24px;
+    color: var(--icon-color);
+  }
+
+  @media (max-width: 600px) {
+    .devicon {
+      font-size: 20px;
+    }
+  }
+
+  .custom-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--icon-color);
+  }
+
+  @media (max-width: 600px) {
+    .custom-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style>

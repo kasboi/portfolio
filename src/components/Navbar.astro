@@ -1,0 +1,12 @@
+---
+/**
+ * Navbar Component
+ * Uses a React island for the entire navbar since logo animation
+ * and theme toggle both require framer-motion and theme state
+ */
+import NavbarClient from './react/NavbarClient';
+
+const resumeLink = "https://drive.google.com/file/d/1zul6kj4cH1UWvor4dLfFTBqzPScZGUG0/view?usp=sharing";
+---
+
+<NavbarClient client:load resumeLink={resumeLink} />

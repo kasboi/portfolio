@@ -1,0 +1,202 @@
+---
+import "../styles/variables.css";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: string;
+}
+
+const { 
+  title = "KAS | Front-End Developer", 
+  description = "Software Engineer with 4+ years of experience building web applications with React, TypeScript, and modern front-end technologies.",
+  image = "/img/og-image.png",
+  canonicalURL = Astro.url.href,
+} = Astro.props;
+
+const siteUrl = Astro.site || "https://kasboi.dev";
+const fullImageUrl = new URL(image, siteUrl).href;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#9c36b5" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullImageUrl} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={fullImageUrl} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    
+    <!-- Devicons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+    
+    <!-- Theme initialization - runs before render to prevent flash -->
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem('theme') || 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Kolawole Abdullah Solahudeen",
+      "alternateName": "KAS",
+      "url": canonicalURL,
+      "jobTitle": "Front-End Developer",
+      "description": description,
+      "sameAs": [
+        "https://github.com/kasboi",
+        "https://www.linkedin.com/in/abdullah-solahudeen/",
+        "https://codepen.io/kolawole-abdullah-solahudeen"
+      ]
+    })} />
+  </head>
+  <body>
+    <slot />
+    
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --text-1: #495057;
+    --text-2: #343a40;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: var(--font-weight, 300);
+    height: 100%;
+    background-color: var(--bg-color);
+    color: var(--font-primary);
+    transition: background-color 0.3s cubic-bezier(0.45, 0, 0.55, 1),
+                color 0.3s cubic-bezier(0.45, 0, 0.55, 1);
+    padding: 0 2rem;
+  }
+
+  @media (max-width: 1024px) {
+    body {
+      padding: 0 1.5rem;
+    }
+  }
+
+  @media (max-width: 425px) {
+    body {
+      padding: 0 1rem;
+    }
+  }
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--font-secondary);
+  }
+
+  a:focus,
+  a:visited,
+  a:active,
+  a:hover,
+  a:link {
+    color: var(--font-secondary);
+  }
+
+  ion-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+    color: var(--font-secondary);
+  }
+
+  @media (max-width: 768px) {
+    ion-icon {
+      margin: 5px 0;
+    }
+  }
+
+  .logo-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .logo-box li:last-of-type {
+    margin-bottom: 0.5rem;
+  }
+
+  .logo-box li {
+    padding: 4px;
+  }
+
+  @media (max-width: 600px) {
+    .logo-box li {
+      padding: 3px;
+    }
+  }
+
+  .logo-box::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 2rem;
+    margin: 0 auto;
+    background-color: var(--font-secondary);
+  }
+</style>

@@ -176,7 +176,7 @@
   }
 }
 
-.job-desc-details-list ion-icon {
+.list-icon {
   flex: 0 0 30px;
   font-size: 16px;
   color: var(--font-secondary);
@@ -184,7 +184,7 @@
 }
 
 @media (max-width: 600px) {
-  .job-desc-details-list ion-icon {
+  .list-icon {
     flex: 0 0 20px;
     font-size: 12px;
   }

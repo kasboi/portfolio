@@ -145,10 +145,7 @@ const WorkExperience = () => {
         <ul className="job-desc-details">
           {jobDescription[toggleId].duties.map((item, index) => (
             <li key={index} className="job-desc-details-list">
-              <ion-icon
-                name="caret-forward-outline"
-                class="list-icon"
-              ></ion-icon>
+              <span className="list-icon" aria-hidden="true">▸</span>
               <span className="list-text">{item}</span>
             </li>
           ))}
@@ -159,15 +156,3 @@ const WorkExperience = () => {
 };
 
 export default WorkExperience;
-
-// Type declaration for ion-icon
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "ion-icon": React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement> & { name: string; class?: string },
-        HTMLElement
-      >;
-    }
-  }
-}

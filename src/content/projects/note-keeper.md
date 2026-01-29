@@ -4,8 +4,8 @@ description: "Fullstack web app for note taking and tracking. Equipped with Fire
 liveLink: "https://kas-notesapp.netlify.app/"
 gitLink: "https://github.com/kasboi/notes_app"
 technologies: ["JavaScript", "React", "Firebase", "Material UI"]
-featured: true
-order: 3
+featured: false
+order: 4
 ---
 
 A fullstack note-taking application with user authentication and cloud storage.

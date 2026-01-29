@@ -1,0 +1,17 @@
+/* Logo Component Styles */
+
+.logo-svg {
+  width: 75px;
+  height: auto;
+  stroke-width: 16;
+  stroke-linejoin: round;
+  overflow: visible;
+}
+
+.logo-svg--light {
+  stroke: #000;
+}
+
+.logo-svg--dark {
+  stroke: #fff;
+}

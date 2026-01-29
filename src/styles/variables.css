@@ -1,0 +1,54 @@
+/* ===========================================
+   CSS Custom Properties (Variables)
+   For theme-independent styling
+   =========================================== */
+
+/* Breakpoints (matching Media.js) */
+:root {
+  --breakpoint-mobile-s: 320px;
+  --breakpoint-mobile-m: 375px;
+  --breakpoint-mobile-l: 425px;
+  --breakpoint-mobile: 600px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-laptop: 1024px;
+  --breakpoint-laptop-l: 1440px;
+  --breakpoint-desktop: 2560px;
+}
+
+/* Light Theme (Default) */
+:root,
+[data-theme="light"] {
+  --logo-color: #9c36b5;
+  --logo-color-2: #be4bdb;
+
+  --font-family: "Poppins", sans-serif;
+  --font-primary: #495057;
+  --font-secondary: #343a40;
+  --font-tertiary: #9c36b5;
+  --font-weight: 300;
+
+  --bg-color: #f8f9fa;
+  --switch-color: #e9ecef;
+  --icon-color: #750d8f;
+
+  --modal-primary: #f1f3f5;
+  --modal-secondary: #dee2e6;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --logo-color: #f8f9fa;
+  --logo-color-2: #f8f9fa;
+
+  --font-primary: #f8f9fa;
+  --font-secondary: #ced4da;
+  --font-tertiary: #b555cc;
+  --font-weight: 200;
+
+  --bg-color: #212529;
+  --switch-color: teal;
+  --icon-color: #e6eaee;
+
+  --modal-primary: #343a40;
+  --modal-secondary: #495057;
+}

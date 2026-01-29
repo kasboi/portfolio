@@ -1,0 +1,149 @@
+---
+/**
+ * Sidebar Component
+ * Displays social media links on the left and email on the right
+ * This is a static component - no JavaScript hydration needed
+ */
+
+interface SocialLink {
+  href: string;
+  icon: string;
+  label: string;
+}
+
+const socialLinks: SocialLink[] = [
+  {
+    href: "https://github.com/kasboi",
+    icon: "logo-github",
+    label: "GitHub Profile"
+  },
+  {
+    href: "https://www.linkedin.com/in/abdullah-solahudeen/",
+    icon: "logo-linkedin", 
+    label: "LinkedIn Profile"
+  },
+  {
+    href: "https://codepen.io/kolawole-abdullah-solahudeen",
+    icon: "logo-codepen",
+    label: "CodePen Profile"
+  }
+];
+
+const email = "solahudeen15@gmail.com";
+---
+
+<!-- Left Sidebar - Social Links -->
+<div class="sidebar-left">
+  <ul class="logo-box">
+    {socialLinks.map((link) => (
+      <li class="logo-box__container">
+        <a 
+          href={link.href} 
+          rel="noreferrer" 
+          target="_blank"
+          aria-label={link.label}
+        >
+          <ion-icon name={link.icon}></ion-icon>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<!-- Right Sidebar - Email -->
+<div class="sidebar-right">
+  <div class="text-box">
+    <a href={`mailto:${email}`}>{email}</a>
+  </div>
+</div>
+
+<style>
+  .sidebar-left {
+    display: block;
+    width: 30px;
+    position: fixed;
+    bottom: 0;
+    left: 8px;
+    right: auto;
+    z-index: 10;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar-left {
+      width: 20px;
+      left: 5px;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .sidebar-left {
+      width: 20px;
+      left: 5px;
+    }
+  }
+
+  .sidebar-right {
+    font-size: 1rem;
+    display: block;
+    width: 40px;
+    position: fixed;
+    bottom: 0;
+    left: auto;
+    right: 8px;
+    z-index: 10;
+    color: var(--font-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .sidebar-right {
+      font-size: 0.85rem;
+      width: 20px;
+      right: 5px;
+    }
+  }
+
+  @media (max-width: 425px) {
+    .sidebar-right {
+      width: 15px;
+      right: 5px;
+    }
+  }
+
+  .text-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    color: var(--font-secondary);
+  }
+
+  .text-box a {
+    font-size: inherit;
+    font-weight: 400;
+    padding: 10px;
+    letter-spacing: 3px;
+    writing-mode: vertical-rl;
+    color: inherit;
+  }
+
+  @media (max-width: 768px) {
+    .text-box a {
+      padding: 0;
+    }
+  }
+
+  .text-box::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 4rem;
+    margin: 0 auto;
+    background-color: var(--font-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .text-box::after {
+      height: 6rem;
+    }
+  }
+</style>

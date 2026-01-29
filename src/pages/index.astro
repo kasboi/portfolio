@@ -1,8 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PortfolioApp from '../PortfolioApp.jsx';
+import Navbar from '../components/Navbar.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Home from '../components/Home.astro';
+import Background from '../components/Background.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
 ---
 
 <Layout title="KAS | Front-End Developer">
-  <PortfolioApp client:load />
+  <Navbar />
+  <Sidebar />
+  <main>
+    <Home />
+    <Background />
+    <Projects />
+    <Contact />
+  </main>
 </Layout>
+
+<style>
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 4rem;
+  }
+</style>

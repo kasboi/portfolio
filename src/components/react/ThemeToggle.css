@@ -1,0 +1,66 @@
+/* Theme Toggle and Navbar Client Styles */
+
+.navbar-client {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg-color);
+}
+
+.logo-link {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+
+.resume-btn {
+  border: 1px solid var(--font-secondary);
+  color: var(--bg-color) !important;
+  background-color: var(--logo-color);
+  font-weight: 500;
+  border-radius: 2px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-right: 3rem;
+  transition: opacity 0.2s ease;
+  text-decoration: none;
+}
+
+.resume-btn:hover {
+  opacity: 0.9;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background-color: var(--modal-primary);
+}
+
+.theme-toggle:active {
+  transform: scale(0.9);
+}
+
+.theme-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--font-secondary);
+}
+
+.icon-placeholder {
+  width: 24px;
+  height: 24px;
+}

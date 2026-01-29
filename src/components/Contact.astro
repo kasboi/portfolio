@@ -1,0 +1,45 @@
+---
+/**
+ * Contact Section Component
+ * Static wrapper for the contact form
+ * The form itself is a React island for interactivity
+ */
+import ContactForm from './react/ContactForm';
+---
+
+<section class="contact-section" id="contact">
+  <h2 class="contact-heading">Let's connect</h2>
+  <ContactForm client:visible />
+</section>
+
+<style>
+  .contact-section {
+    margin: 6rem auto 0 auto;
+    max-width: 40rem;
+    color: var(--font-primary);
+  }
+
+  .contact-heading {
+    position: relative;
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+
+  .contact-heading::after {
+    content: "";
+    position: absolute;
+    top: 45%;
+    margin-left: 1rem;
+    display: inline-block;
+    height: 1px;
+    width: 20rem;
+    background-color: #dee2e6;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    .contact-heading::after {
+      width: 8rem;
+    }
+  }
+</style>

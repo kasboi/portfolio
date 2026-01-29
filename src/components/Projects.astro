@@ -2,89 +2,23 @@
 /**
  * Projects Section Component
  * Displays project cards in a grid layout
- * This is a static component - data is rendered at build time
+ * This is a static component - data is rendered at build time from content collections
  */
+import { getCollection } from "astro:content";
 
-interface Project {
-  liveLink: string;
-  gitLink: string;
-  projectName: string;
-  projectDesc: string;
-  technologies: string[];
-}
-
-interface Props {
-  projects?: Project[];
-}
-
-// Default project data - can be overridden via props or later migrated to content collections
-const defaultProjects: Project[] = [
-  {
-    liveLink: "https://navigate-jade.vercel.app/",
-    gitLink: "https://github.com/kasboi/navigate",
-    projectName: "Navigate - Urban Areas",
-    projectDesc: "An open source project for discovering quality of life and average salaries for various job sectors in urban areas. Includes search, filter, pictures, score of living, infinite scroll amongst other features.",
-    technologies: ["Typescript", "Next.js", "React", "Teleport Open API"]
-  },
-  {
-    liveLink: "https://ts-weather-forecast.netlify.app/",
-    gitLink: "https://github.com/kasboi/React-Weather-App-Typescript#",
-    projectName: "Weather Forecast",
-    projectDesc: "A 5-day weather forecast web app. This project Consumes 2 APIs [GeoDB & Openweathermap] to accurately determine the latitude and longitude of cities and their weather report for the next 5 days.",
-    technologies: ["Typescript", "React", "API"]
-  },
-  {
-    liveLink: "https://kas-notesapp.netlify.app/",
-    gitLink: "https://github.com/kasboi/notes_app",
-    projectName: "Note Keeper",
-    projectDesc: "Fullstack web app for note taking and tracking. Equiped with Firebase services (authentication & firestore).",
-    technologies: ["Javascript", "React", "Firebase", "Material UI"]
-  },
-  {
-    liveLink: "https://codepen.io/kolawole-abdullah-solahudeen/pen/BaJzjoN",
-    gitLink: "#",
-    projectName: "Tic-Tac Toe",
-    projectDesc: "A beautiful and simple re-creation of the popular 3x3 tic-tac toe game.",
-    technologies: ["Javascript", "HTML", "CSS"]
-  },
-  {
-    liveLink: "https://monster-btc.netlify.app/",
-    gitLink: "https://github.com/kasboi/monster",
-    projectName: "Monster Finance",
-    projectDesc: "A responsive landing page demo for a blockchain project.",
-    technologies: ["Javascript", "HTML", "CSS"]
-  },
-  {
-    liveLink: "https://asalytics-test-six.vercel.app/",
-    gitLink: "https://github.com/kasboi/asalytics-test",
-    projectName: "Analytics",
-    projectDesc: "Web application for keeping track of availablity of crypto coins built on top of the Next.js framework + Typescript.",
-    technologies: ["Typescript", "React", "Next.js", "Jest"]
-  },
-  {
-    liveLink: "https://guitarclub.netlify.app/",
-    gitLink: "https://github.com/kasboi/guitar",
-    projectName: "Guitar Club",
-    projectDesc: "A small responsive website i made early on while fiddling with SCSS.",
-    technologies: ["Javascript", "HTML", "SCSS"]
-  },
-  {
-    liveLink: "https://ecstatic-volhard-ea4bc9.netlify.app/",
-    gitLink: "#",
-    projectName: "Ace Blog",
-    projectDesc: "A simple blog that consumes API and uses it to display various news articles.",
-    technologies: ["Javascript", "HTML", "CSS"]
-  },
-  {
-    liveLink: "https://codepen.io/kolawole-abdullah-solahudeen/pen/dyJXGGa/",
-    gitLink: "#",
-    projectName: "Calculator",
-    projectDesc: "Simple calculator app.",
-    technologies: ["Javascript", "HTML", "CSS"]
-  },
-];
-
-const { projects = defaultProjects } = Astro.props;
+// Fetch projects from content collection and sort by order
+const projectEntries = await getCollection("projects");
+const projects = projectEntries
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+  .map((entry) => ({
+    liveLink: entry.data.liveLink,
+    gitLink: entry.data.gitLink,
+    projectName: entry.data.title,
+    projectDesc: entry.data.description,
+    technologies: entry.data.technologies,
+    featured: entry.data.featured,
+    slug: entry.slug,
+  }));
 ---
 
 <section class="projects-container" id="projects">

@@ -33,3 +33,4 @@ pnpm-debug.log*
 # AI Instructions & Directory
 /.github
 /.agents
+MIGRATION_PLAN.md

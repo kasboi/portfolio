@@ -27,10 +27,8 @@ pnpm-debug.log*
 # Local Netlify folder
 .netlify
 
-# Vite
-dist
-dist-ssr
-*.local
+# Astro
+.astro/
 
 # AI Instructions & Directory
 /.github

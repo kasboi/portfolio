@@ -106,7 +106,7 @@ const Contact = () => {
   };
 
   return (
-    <Container>
+    <Container id="contact">
       <h2 className="project__heading">Let's connect</h2>
       <form onSubmit={handleSubmit} id="survey-form">
         <div className="form-class">

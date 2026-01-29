@@ -48,6 +48,7 @@ const Box = styled.div`
 const Projects = () => {
   return (
     <Container
+      id="projects"
       initial={{ y: 40, opacity: 0 }}
       whileInView={{
         y: 0,

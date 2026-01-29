@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
 import NavStyle from "./components/styles/Navbar.style.js";
 import { propContext } from "./contexts/PropContext.js";
 import NightIcon from "./icons/night.jsx";
@@ -23,6 +22,12 @@ const Resume = styled(motion.a)`
   margin-right: 3rem;
 `;
 
+const LogoLink = styled.a`
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+`;
+
 const Navbar = ({ theme, invertTheme, setHere }) => {
   const { switched, setSwitched } = useContext(propContext);
 
@@ -38,14 +43,9 @@ const Navbar = ({ theme, invertTheme, setHere }) => {
 
   return (
     <Nav>
-      <Link
-        to="/"
-        style={{
-          marginRight: "auto",
-        }}
-      >
+      <LogoLink href="/">
         {switched === "switched" ? <LightLogo /> : <DarkLogo />}
-      </Link>
+      </LogoLink>
       <Resume
         href="https://drive.google.com/file/d/1zul6kj4cH1UWvor4dLfFTBqzPScZGUG0/view?usp=sharing"
         target="_blank"

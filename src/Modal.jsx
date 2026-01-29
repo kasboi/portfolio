@@ -1,26 +1,32 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { ModalStyle } from "./components/styles/Modal.style.js";
+import styled from "styled-components";
 
 const { Container, Card } = ModalStyle;
 
+const ModalLink = styled.a`
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+`;
+
 const modalDetails = [
   {
-    url: "/background",
+    sectionId: "background",
     imgSrc: "./img/background.jpg",
     imgDetails: "background&skills",
     detailsHeading: "Background & Skills",
     detailsPara: "Get to know me better!",
   },
   {
-    url: "/projects",
+    sectionId: "projects",
     imgSrc: "./img/project.jpg",
     imgDetails: "Projects",
     detailsHeading: "Projects",
     detailsPara: "Check out some of my projects",
   },
   {
-    url: "/contact",
+    sectionId: "contact",
     imgSrc: "./img/contact.jpg",
     imgDetails: "contact",
     detailsHeading: "Contact",
@@ -38,15 +44,28 @@ const Modal = ({ modal, setModal, setOpen }) => {
     }, 1000);
   }, [loading]);
 
-  const setModality = () => {
+  const handleClick = (sectionId) => {
     setModal("");
     setOpen("");
+    // Scroll to section
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
   };
+
   return (
     <Container className={modal}>
       {modalDetails.map((item, index) => (
-        <Link to={item.url} key={index}>
-          <Card onClick={() => setModality()}>
+        <ModalLink
+          key={index}
+          href={`#${item.sectionId}`}
+          onClick={(e) => {
+            e.preventDefault();
+            handleClick(item.sectionId);
+          }}
+        >
+          <Card>
             {loading ? (
               <div className="shazam" />
             ) : (
@@ -60,7 +79,7 @@ const Modal = ({ modal, setModal, setOpen }) => {
               <ion-icon name="arrow-forward-circle" size="large"></ion-icon>
             </div>
           </Card>
-        </Link>
+        </ModalLink>
       ))}
     </Container>
   );

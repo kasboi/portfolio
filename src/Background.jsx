@@ -212,6 +212,7 @@ const Technologies = styled.div`
 const Home = () => {
   return (
     <Container
+      id="background"
       initial={{ y: 40, opacity: 0 }}
       whileInView={{
         y: 0,

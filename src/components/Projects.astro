@@ -1,8 +1,8 @@
 ---
 /**
  * Projects Section Component
- * Displays project cards in a grid layout
- * This is a static component - data is rendered at build time from content collections
+ * Modern card-based layout with featured projects and hover effects
+ * Follows Web Interface Guidelines for accessibility and interactions
  */
 import { getCollection } from "astro:content";
 
@@ -16,78 +16,207 @@ const projects = projectEntries
     projectName: entry.data.title,
     projectDesc: entry.data.description,
     technologies: entry.data.technologies,
-    featured: entry.data.featured,
+    featured: entry.data.featured ?? false,
     slug: entry.slug,
   }));
+
+// Separate featured and regular projects
+const featuredProjects = projects.filter(p => p.featured);
+const regularProjects = projects.filter(p => !p.featured);
 ---
 
-<section class="projects-container" id="projects">
-  <h3 class="projects-heading">Projects</h3>
-  <div class="projects-grid">
-    {projects.map((project) => (
-      <article class="project-card">
-        <div class="card-icons">
-          <svg 
-            class="folder-icon" 
-            viewBox="0 0 24 24" 
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
-          </svg>
-          <div class="card-links">
-            <a 
-              href={project.liveLink} 
-              rel="noreferrer" 
-              target="_blank"
-              aria-label={`View live demo of ${project.projectName}`}
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
-              </svg>
-            </a>
-            {project.gitLink !== "#" && (
-              <a 
-                href={project.gitLink} 
-                rel="noreferrer"
-                target="_blank"
-                aria-label={`View source code of ${project.projectName} on GitHub`}
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </a>
-            )}
-          </div>
-        </div>
-        <h2 class="card-title">{project.projectName}</h2>
-        <p class="card-description">{project.projectDesc}</p>
-        <ul class="card-technologies">
-          {project.technologies.map((tech) => (
-            <li class="tech-tag">-{tech}-</li>
-          ))}
-        </ul>
-      </article>
-    ))}
+<section class="projects-section" id="projects">
+  <div class="section-header">
+    <h2 class="section-title">
+      <span class="title-accent">Featured</span> Projects
+    </h2>
+    <p class="section-subtitle">A selection of work I'm proud of</p>
   </div>
+
+  {/* Featured Projects - Larger Cards */}
+  {featuredProjects.length > 0 && (
+    <div class="featured-grid">
+      {featuredProjects.map((project, index) => (
+        <article 
+          class="project-card featured-card"
+          style={`--animation-delay: ${index * 0.1}s`}
+        >
+          <div class="card-glow" aria-hidden="true"></div>
+          <div class="card-content">
+            <div class="card-header">
+              <div class="card-badge">Featured</div>
+              <div class="card-actions">
+                <a 
+                  href={project.liveLink} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="action-link"
+                  aria-label={`View live demo of ${project.projectName}`}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                </a>
+                {project.gitLink !== "#" && (
+                  <a 
+                    href={project.gitLink} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-link"
+                    aria-label={`View source code of ${project.projectName} on GitHub`}
+                  >
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </div>
+            <h3 class="card-title">{project.projectName}</h3>
+            <p class="card-description">{project.projectDesc}</p>
+            <ul class="tech-stack" aria-label="Technologies used">
+              {project.technologies.map((tech) => (
+                <li class="tech-pill">{tech}</li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  )}
+
+  {/* Other Projects */}
+  {regularProjects.length > 0 && (
+    <>
+      <h3 class="other-projects-title">Other Projects</h3>
+      <div class="projects-grid">
+        {regularProjects.map((project, index) => (
+          <article 
+            class="project-card"
+            style={`--animation-delay: ${(featuredProjects.length + index) * 0.05}s`}
+          >
+            <div class="card-content">
+              <div class="card-header">
+                <svg class="folder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="card-actions">
+                  <a 
+                    href={project.liveLink} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="action-link"
+                    aria-label={`View live demo of ${project.projectName}`}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                      <polyline points="15 3 21 3 21 9"/>
+                      <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                  </a>
+                  {project.gitLink !== "#" && (
+                    <a 
+                      href={project.gitLink} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="action-link"
+                      aria-label={`View source code of ${project.projectName} on GitHub`}
+                    >
+                      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                      </svg>
+                    </a>
+                  )}
+                </div>
+              </div>
+              <h3 class="card-title">{project.projectName}</h3>
+              <p class="card-description">{project.projectDesc}</p>
+              <ul class="tech-stack" aria-label="Technologies used">
+                {project.technologies.map((tech) => (
+                  <li class="tech-pill">{tech}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+    </>
+  )}
 </section>
 
 <style>
-  .projects-container {
-    max-width: 90%;
+  /* Section Layout */
+  .projects-section {
+    max-width: 1100px;
     margin: 0 auto;
-    z-index: -100;
-    color: var(--font-secondary);
-    /* Scroll-based fade-in animation */
-    animation: scrollFadeIn 0.4s ease-in both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 30%;
+    padding: 2rem 1.5rem;
   }
 
-  @keyframes scrollFadeIn {
+  /* Section Header */
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 700;
+    color: var(--font-primary);
+    margin-bottom: 0.5rem;
+    text-wrap: balance;
+  }
+
+  .title-accent {
+    color: var(--logo-color);
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    color: var(--font-secondary);
+    margin: 0;
+  }
+
+  /* Featured Grid - Larger Cards */
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  /* Regular Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .other-projects-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--font-secondary);
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Card Base */
+  .project-card {
+    position: relative;
+    background: var(--modal-primary);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: cardFadeIn 0.5s ease both;
+    animation-delay: var(--animation-delay, 0s);
+  }
+
+  @keyframes cardFadeIn {
     from {
       opacity: 0;
-      transform: translateY(40px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
@@ -95,105 +224,235 @@ const projects = projectEntries
     }
   }
 
-  .projects-heading {
-    position: relative;
-    font-weight: 500;
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-    color: var(--logo-color);
+  /* Scroll-based animation */
+  @supports (animation-timeline: view()) {
+    .project-card {
+      animation: scrollCardIn 0.4s ease-out both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 40%;
+    }
+
+    @keyframes scrollCardIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
   }
 
-  .projects-grid {
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.1),
+      0 0 0 1px var(--logo-color);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .project-card:hover {
+      transform: none;
+    }
+  }
+
+  /* Featured Card Glow Effect */
+  .featured-card {
+    border: 1px solid transparent;
+    background: 
+      linear-gradient(var(--modal-primary), var(--modal-primary)) padding-box,
+      linear-gradient(135deg, var(--logo-color) 0%, transparent 50%, var(--logo-color) 100%) border-box;
+  }
+
+  .card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--logo-color), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .featured-card:hover .card-glow {
+    opacity: 1;
+  }
+
+  /* Card Content */
+  .card-content {
+    padding: 1.5rem;
     display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem 1rem;
+    flex-direction: column;
+    height: 100%;
+    min-height: 220px;
   }
 
-  .project-card {
-    padding: 1.35rem 1.5rem;
-    flex: 1 0 31%;
-    border-radius: 5px;
-    border: 2px solid gray;
-    background: var(--modal-primary);
+  .featured-card .card-content {
+    min-height: 260px;
   }
 
-  @media (max-width: 1024px) {
-    .project-card {
-      flex: 1 0 32%;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .project-card {
-      flex: 1 0 45%;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .project-card {
-      flex: 1 0 100%;
-    }
-  }
-
-  .card-icons {
+  /* Card Header */
+  .card-header {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 1rem;
+  }
+
+  .card-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--logo-color);
+    background: rgba(156, 54, 181, 0.15);
+    padding: 0.35rem 0.75rem;
+    border-radius: 100px;
   }
 
   .folder-icon {
-    width: 4rem;
-    height: 4rem;
-    margin-right: auto;
-    color: var(--font-secondary);
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--logo-color);
+    opacity: 0.8;
   }
 
-  .card-links {
+  /* Card Actions */
+  .card-actions {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 
-  .card-links a {
+  .action-link {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 8px;
     color: var(--font-secondary);
+    background: transparent;
+    transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .action-link:hover {
+    color: var(--logo-color);
+    background: rgba(156, 54, 181, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .action-link:focus-visible {
+    outline: 2px solid var(--logo-color);
+    outline-offset: 2px;
+  }
+
+  .action-link svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  /* Card Title */
+  .card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--font-primary);
+    margin: 0 0 0.75rem 0;
+    line-height: 1.3;
     transition: color 0.2s ease;
   }
 
-  .card-links a:hover {
+  .project-card:hover .card-title {
     color: var(--logo-color);
   }
 
-  .card-links svg {
-    width: 2rem;
-    height: 2rem;
+  .featured-card .card-title {
+    font-size: 1.25rem;
   }
 
-  .card-title {
-    color: var(--font-primary);
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-  }
-
+  /* Card Description */
   .card-description {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
+    font-size: 0.875rem;
     color: var(--font-secondary);
+    line-height: 1.6;
+    margin: 0;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  .card-technologies {
+  .featured-card .card-description {
+    -webkit-line-clamp: 5;
+  }
+
+  /* Tech Stack */
+  .tech-stack {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 1.25rem 0 0 0;
   }
 
-  .tech-tag {
+  .tech-pill {
     font-size: 0.75rem;
-    color: var(--font-tertiary);
     font-weight: 500;
+    color: var(--font-tertiary);
+    background: rgba(156, 54, 181, 0.08);
+    padding: 0.35rem 0.75rem;
+    border-radius: 100px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .project-card:hover .tech-pill {
+    background: rgba(156, 54, 181, 0.15);
+    color: var(--logo-color);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .projects-section {
+      padding: 1.5rem 1rem;
+    }
+
+    .section-header {
+      margin-bottom: 2rem;
+    }
+
+    .featured-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card-content {
+      padding: 1.25rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1rem;
+    }
+
+    .featured-card .card-title {
+      font-size: 1.125rem;
+    }
   }
 </style>

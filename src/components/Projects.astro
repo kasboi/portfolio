@@ -17,7 +17,7 @@ const projects = projectEntries
     projectDesc: entry.data.description,
     technologies: entry.data.technologies,
     featured: entry.data.featured ?? false,
-    slug: entry.slug,
+    slug: entry.id,
   }));
 
 // Separate featured and regular projects

@@ -4,7 +4,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://kolawole-kas.vercel.app", // Update this with your actual domain
+  site: "https://generalkas.com",
   integrations: [react(), sitemap()],
   vite: {
     ssr: {

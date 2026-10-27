@@ -30,6 +30,18 @@ const jobDescription: JobDescription[] = [
   },
   {
     id: 1,
+    jobTitle: "Frontend Engineer & Mentor",
+    jobPlace: "Career Connects",
+    jobTimeline: "May 2023 - Oct. 2025",
+    duties: [
+      `Mentored students one-on-one and in groups, clarifying complex concepts and giving personalised career guidance.`,
+      `Worked with stakeholders to keep the frontend curriculum aligned with current industry standards and emerging trends.`,
+      `Helped students debug difficult problems, building their problem-solving skills and independence.`,
+      `Designed and delivered workshops on advanced frontend topics, and built the bootcamp landing page, which lifted enrolments by up to 45%.`,
+    ],
+  },
+  {
+    id: 2,
     jobTitle: "Frontend Engineer",
     jobPlace: "BanffPay",
     jobTimeline: "Apr. 2024 - June 2025",
@@ -37,18 +49,6 @@ const jobDescription: JobDescription[] = [
       `Built the frontend of an agency banking app, focused on responsive UI and operational efficiency for field agents.`,
       `Worked closely with product and backend teams to deliver reliable integrations and a smooth user experience.`,
       `Took part in developer hiring and mentoring sessions to support the growth of the team.`,
-    ],
-  },
-  {
-    id: 2,
-    jobTitle: "Frontend Engineer & Mentor",
-    jobPlace: "Career Connects",
-    jobTimeline: "May 2023 - Present",
-    duties: [
-      `Mentor students one-on-one and in groups, clarifying complex concepts and giving personalised career guidance.`,
-      `Work with stakeholders to keep the frontend curriculum aligned with current industry standards and emerging trends.`,
-      `Help students debug difficult problems, building their problem-solving skills and independence.`,
-      `Design and deliver workshops on advanced frontend topics, and built the bootcamp landing page, which lifted enrolments by up to 45%.`,
     ],
   },
   {

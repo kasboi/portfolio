@@ -5,7 +5,7 @@ liveLink: "https://banffpay-v2.vercel.app/"
 gitLink: "#"
 technologies: ["Astro", "TypeScript", "GSAP", "Responsive Design"]
 featured: true
-order: 1
+order: 3
 ---
 
 BanffPay is a global payments platform that simplifies international money transfers and currency exchange. I built their corporate website using Astro for optimal performance and SEO.

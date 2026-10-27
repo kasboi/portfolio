@@ -4,8 +4,8 @@ description: "A 5-day weather forecast web app. This project Consumes 2 APIs [Ge
 liveLink: "https://ts-weather-forecast.netlify.app/"
 gitLink: "https://github.com/kasboi/React-Weather-App-Typescript#"
 technologies: ["TypeScript", "React", "API"]
-featured: true
-order: 3
+featured: false
+order: 7
 ---
 
 A comprehensive weather forecast application providing 5-day predictions for cities worldwide.

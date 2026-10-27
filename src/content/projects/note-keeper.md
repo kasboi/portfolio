@@ -5,7 +5,7 @@ liveLink: "https://kas-notesapp.netlify.app/"
 gitLink: "https://github.com/kasboi/notes_app"
 technologies: ["JavaScript", "React", "Firebase", "Material UI"]
 featured: false
-order: 4
+order: 6
 ---
 
 A fullstack note-taking application with user authentication and cloud storage.

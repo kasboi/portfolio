@@ -5,7 +5,7 @@ liveLink: "https://bootcamp.generalkas.com"
 gitLink: "https://github.com/kasboi/bootcampC6"
 technologies: ["Astro", "Starlight", "MDX", "React"]
 featured: true
-order: 2
+order: 4
 ---
 
 A comprehensive learning platform for the Career Connects Frontend Bootcamp. Built with Astro Starlight, this documentation site serves as the central hub for bootcamp participants.
